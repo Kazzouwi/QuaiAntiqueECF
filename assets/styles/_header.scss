@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind:wght@600&family=Montserrat:wght@700&display=swap');
+
+.header {
+    background-color: #392C1E;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    height: 125px;
+}
+
+.logo {
+    width: 85px;
+    height: 85px;
+    margin-left: 25px;
+    border-radius: 8px;
+}
+
+.title {
+    position: absolute;
+    left: 40%;
+    color: #E10000;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3rem;
+}
+
+button {
+    height: 50px;
+    width: 150px;
+    background-color: #E10000;
+    color: #E4DDCD;
+    font-family: 'Hind', sans-serif;
+    font-size: 1.5rem;
+    border-radius: 5px;
+    border: none;
+    margin-right: 25px;
+}
