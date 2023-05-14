@@ -39,6 +39,19 @@ class TableRepository extends ServiceEntityRepository
         }
     }
 
+    public function searchByPlaces($guests) 
+    {
+        $queryBuilder = $this->createQueryBuilder('table');
+
+        $query = $queryBuilder
+            ->select('table')
+            ->where('table.places LIKE :guests')
+            ->setParameter('guests', $guests)
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
 //    /**
 //     * @return Table[] Returns an array of Table objects
 //     */

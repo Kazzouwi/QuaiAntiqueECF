@@ -17,7 +17,7 @@ class HomeController extends AbstractController
     {
         $meals = $mealRepository->findBy(['isFavorite' => 'true'], ['id' => 'ASC'], 4);
         $openingHours = $openingHoursRepository->findAll();
-
+        
         return $this->render('home.html.twig', [
             'meals' => $meals,
             'opening_hours' => $openingHours

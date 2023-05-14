@@ -1,0 +1,4 @@
+{% set k = number_of_interval %}
+{% for i in 0..k-1 %}
+    <p>{{ list_of_interval[i]|date("H:i") }}</p>
+{% endfor %}

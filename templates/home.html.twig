@@ -11,7 +11,7 @@
         {% endfor %}
     </div>
     <div class="reservation">
-        <button type="button" class="reservation-btn">Réservation</button>
+        <button type="button" class="reservation-btn" onclick="window.location.href='{{ path('reservation') }}';">Réservation</button>
     </div>
 
 
@@ -33,6 +33,7 @@
                         <li>{{ opening_hour.eveningOpeningHour ? opening_hour.eveningOpeningHour|date('H:i') : 'Fermé' }}</li>
                         <li>{{ opening_hour.eveningClosingHour ? opening_hour.eveningClosingHour|date('H:i') : '' }}</li>
                     </ul>
+
                 {% endfor %}
             </div>
         </div>

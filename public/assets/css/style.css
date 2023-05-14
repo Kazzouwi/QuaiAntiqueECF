@@ -143,6 +143,7 @@ main {
 
 .contact {
     border-left: solid 2px #392C1E;
+    text-align: center;
 }
 
 .time {
@@ -167,6 +168,10 @@ main {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     border-bottom: solid 2px #392C1E;
+}
+
+.menu-meals h1 {
+    margin-left: 15px;
 }
 
 .menu-starter, .menu-dish {
