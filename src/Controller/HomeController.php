@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+
+use App\Entity\Meal;
 use App\Repository\MealRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,7 +14,7 @@ class HomeController extends AbstractController
     #[Route('/', name: 'home')]
     public function home(MealRepository $mealRepository, Request $request)
     {
-        $meals = $mealRepository->findAll();
+        $meals = $mealRepository->findBy(['isFavorite' => 'true'], ['id' => 'ASC'], 2);
 
         return $this->render('home.html.twig', [
             'meals' => $meals

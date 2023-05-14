@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block main %}
+    <div>Menu :</div>
+    {% for meal in meals %}
+        <div class="starter">
+        {% if meal.mealCategory == 'starter' %}
+            <h3>{{ meal.name }}</h3>
+            <p>{{ meal.price }}</p>
+        {% endif %}
+        
+
+        </div>
+    {% endfor %}
+
+{% endblock main %}

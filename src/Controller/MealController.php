@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
-#[Route('/meal')]
+#[Route('/admin/meal')]
 class MealController extends AbstractController
 {
     #[Route('/', name: 'app_meal_index', methods: ['GET'])]

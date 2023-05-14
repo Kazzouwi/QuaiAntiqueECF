@@ -14,14 +14,14 @@
         <a href="{{ path('home') }}"><img src="{{ asset('/assets/img/Quai_antique.png')}}" alt="logo" class="logo"></a>
         <h1 class="title">Quai antique</h1>
         <div class="buttons">
-        <button type="button" class="carte">Carte</button>
+        <button type="button" class="carte" onclick="window.location.href='{{ path('menu') }}';">Carte</button>
         <button type="button" class="connexion">Connection</button>
     {% endblock header %}
 </header>
 
 <main>
     {% block main %}
-
+    
     {% endblock main %}
 </main>
 

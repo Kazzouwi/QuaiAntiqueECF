@@ -42,6 +42,14 @@ class MealType extends AbstractType
                 'expanded' => true,
                 'multiple' => true
             ])
+            ->add('mealCategory', ChoiceType::class, [
+                'choices' => [
+                    'Entrée' => 'starter',
+                    'Plat' => 'dish',
+                    'Dessert' => 'dessert'
+                ]
+            ])
+            ->add('price')
         ;
     }
 

@@ -23,11 +23,17 @@ class Meal
     #[ORM\Column]
     private ?bool $isFavorite = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?string $image = null;
 
     #[ORM\ManyToMany(targetEntity: Ingredient::class, mappedBy: 'mealList')]
     private Collection $ingredients;
+
+    #[ORM\Column(length: 255)]
+    private ?string $mealCategory = null;
+
+    #[ORM\Column]
+    private ?int $price = null;
 
     public function __construct()
     {
@@ -98,6 +104,30 @@ class Meal
         if ($this->ingredients->removeElement($ingredient)) {
             $ingredient->removeMealList($this);
         }
+
+        return $this;
+    }
+
+    public function getMealCategory(): ?string
+    {
+        return $this->mealCategory;
+    }
+
+    public function setMealCategory(string $mealCategory): self
+    {
+        $this->mealCategory = $mealCategory;
+
+        return $this;
+    }
+
+    public function getPrice(): ?int
+    {
+        return $this->price;
+    }
+
+    public function setPrice(int $price): self
+    {
+        $this->price = $price;
 
         return $this;
     }
