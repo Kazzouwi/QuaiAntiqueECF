@@ -1,16 +1,49 @@
 {% extends "base.html.twig" %}
 
 {% block main %}
-    <div>Menu :</div>
-    {% for meal in meals %}
-        <div class="starter">
-        {% if meal.mealCategory == 'starter' %}
-            <h3>{{ meal.name }}</h3>
-            <p>{{ meal.price }}</p>
-        {% endif %}
-        
-
+    <div class="menu">
+        <div class="menu-offer">
+            <h1>Menu :</h1>
+            <h3>Formule Diner :</h3>
+            <p>Entrée + plat + dessert 20€</p>
+            <h3>Formule déjeuner :</h3>
+            <p>Entrée + plat ou plat + dessert 16€</p>
         </div>
-    {% endfor %}
+        <div class="menu-meals">
+            <div class="menu-starter">
+            <h1>Entrées :</h1>
+            {% for meal in meals %}
+                {% if meal.mealCategory == 'starter' %}
+                <div class="description">
+                    <h3>{{ meal.name }} :</h3>
+                    <p>{{ meal.price }}€</p>
+                </div>
+                {% endif %}
+            {% endfor %}
+            </div>
+            <div class="menu-dish">
+            <h1>Plats :</h1>
+            {% for meal in meals %}
+                {% if meal.mealCategory == 'dish' %}
+                <div class="description">
+                    <h3>{{ meal.name }} :</h3>
+                    <p>{{ meal.price }}€</p>
+                </div>
+                {% endif %}
+            {% endfor %}
+            </div>
+            <div class="menu-desert">
+            <h1>Désserts :</h1>
+            {% for meal in meals %}
+                {% if meal.mealCategory == 'desert' %}
+                <div class="description">
+                    <h3>{{ meal.name }} :</h3>
+                    <p>{{ meal.price }}€</p>
+                </div>
+                {% endif %}
+            {% endfor %}
+            </div>
+        </div>
+    </div>
 
 {% endblock main %}

@@ -19,23 +19,28 @@
 {% endblock main %}
 
 {% block footer %}
-    <div class="schedule_box">
-        <h3>Horaires d'ouvertures :<h3>
-        <div class="schedule">
-            {% for opening_hour in opening_hours %}
-                <h4>{{ opening_hour.day }} :</h4>
-                <ul>
-                    <li class="time">Midi :</li>
-                    <li>{{ opening_hour.morningOpeningHour ? opening_hour.morningOpeningHour|date('H:i') : 'Fermé' }}</li>
-                    <li>{{ opening_hour.morningClosingHour ? opening_hour.morningClosingHour|date('H:i') : '' }}</li>
-                    <li class="time">Soir :</li>
-                    <li>{{ opening_hour.eveningOpeningHour ? opening_hour.eveningOpeningHour|date('H:i') : 'Fermé' }}</li>
-                    <li>{{ opening_hour.eveningClosingHour ? opening_hour.eveningClosingHour|date('H:i') : '' }}</li>
-                </ul>
-            {% endfor %}
+    <div class="footer">
+        <div class="schedule_box">
+            <h3>Horaires d'ouvertures :<h3>
+            <div class="schedule">
+                {% for opening_hour in opening_hours %}
+                    <h4>{{ opening_hour.day }} :</h4>
+                    <ul>
+                        <li class="time">Midi :</li>
+                        <li>{{ opening_hour.morningOpeningHour ? opening_hour.morningOpeningHour|date('H:i') : 'Fermé' }}</li>
+                        <li>{{ opening_hour.morningClosingHour ? opening_hour.morningClosingHour|date('H:i') : '' }}</li>
+                        <li class="time">Soir :</li>
+                        <li>{{ opening_hour.eveningOpeningHour ? opening_hour.eveningOpeningHour|date('H:i') : 'Fermé' }}</li>
+                        <li>{{ opening_hour.eveningClosingHour ? opening_hour.eveningClosingHour|date('H:i') : '' }}</li>
+                    </ul>
+                {% endfor %}
+            </div>
         </div>
-    </div>
-    <div class="contact">
-        <p>1 Rue Jean Jaures, 73000 Chambery</p>
+        <div class="contact">
+            <h2>Adresse :</h2>
+            <p>1 Rue Jean Jaures, 73000 Chambery</p>
+            <h2>Téléphone :</h2>
+            <p>06-XX-XX-XX-XX</p>
+        </div>
     </div>
 {% endblock %}
