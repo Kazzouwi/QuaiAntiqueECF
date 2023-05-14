@@ -1,15 +1,41 @@
 {% extends "base.html.twig" %}
 
 {% block main %}
-
+    <h2>Les plats favoris :</h2>
     <div class="mealDisplay">
         {% for meal in meals %}
             <div class="oneMeal">
                 <h1 class="mealName">{{ meal.name }}</h1>
-                <img src="{{ asset('/uploads/meal/' ~ meal.image)}}" class="mealTitle"/>
-            <div>
+                <img src="{{ asset('/uploads/meal/' ~ meal.image)}}" class="mealImage"/>
+            </div>
         {% endfor %}
-
+    </div>
+    <div class="reservation">
+        <button type="button" class="reservation-btn">Réservation</button>
     </div>
 
+
+    
 {% endblock main %}
+
+{% block footer %}
+    <div class="schedule_box">
+        <h3>Horaires d'ouvertures :<h3>
+        <div class="schedule">
+            {% for opening_hour in opening_hours %}
+                <h4>{{ opening_hour.day }} :</h4>
+                <ul>
+                    <li class="time">Midi :</li>
+                    <li>{{ opening_hour.morningOpeningHour ? opening_hour.morningOpeningHour|date('H:i') : 'Fermé' }}</li>
+                    <li>{{ opening_hour.morningClosingHour ? opening_hour.morningClosingHour|date('H:i') : '' }}</li>
+                    <li class="time">Soir :</li>
+                    <li>{{ opening_hour.eveningOpeningHour ? opening_hour.eveningOpeningHour|date('H:i') : 'Fermé' }}</li>
+                    <li>{{ opening_hour.eveningClosingHour ? opening_hour.eveningClosingHour|date('H:i') : '' }}</li>
+                </ul>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="contact">
+        <p>1 Rue Jean Jaures, 73000 Chambery</p>
+    </div>
+{% endblock %}

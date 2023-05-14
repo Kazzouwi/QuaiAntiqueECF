@@ -3,9 +3,9 @@
 {% block title %}New Meal{% endblock %}
 
 {% block main %}
-    <h1>Create new Meal</h1>
+    <h1>Ajout d'un plat</h1>
 
     {{ include('meal/_form.html.twig') }}
 
-    <a href="{{ path('app_meal_index') }}">back to list</a>
+    <a href="{{ path('app_meal_index') }}">Retour à la liste des plats</a>
 {% endblock %}

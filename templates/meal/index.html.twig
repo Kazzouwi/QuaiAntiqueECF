@@ -3,14 +3,14 @@
 {% block title %}Meal index{% endblock %}
 
 {% block main %}
-    <h1>Meal index</h1>
+    <h1>Liste des plats</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>IsFavorite</th>
+                <th>Type de plat</th>
+                <th>Nom</th>
+                <th>Favoris ?</th>
                 <th>Image</th>
                 <th>actions</th>
             </tr>
@@ -18,17 +18,17 @@
         <tbody>
         {% for meal in meals %}
             <tr>
-                <td>{{ meal.id }}</td>
+                <td>{{ meal.mealCategory }}</td>
                 <td>{{ meal.name }}</td>
                 <td>{{ meal.isFavorite ? 'Yes' : 'No' }}</td>
                 {% if meal.image %}
-                    <td><img src="{{ asset('/uploads/meal/' ~ meal.image)}}" /></td>
+                    <td><img src="{{ asset('/uploads/meal/' ~ meal.image)}}" class="mealImage"/></td>
                 {% else %}
                     <td>Pas d'image pour ce plat</td>
                 {% endif %}
                 <td>
-                    <a href="{{ path('app_meal_show', {'id': meal.id}) }}">show</a>
-                    <a href="{{ path('app_meal_edit', {'id': meal.id}) }}">edit</a>
+                    <a href="{{ path('app_meal_show', {'id': meal.id}) }}">Afficher</a>
+                    <a href="{{ path('app_meal_edit', {'id': meal.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -39,5 +39,6 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_meal_new') }}">Create new</a>
+    <a href="{{ path('app_meal_new') }}">Ajouter un plat</a>
+    <a href="{{ path('app_ingredient_index') }}">Voir les ingrédients</a>
 {% endblock %}

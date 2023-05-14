@@ -18,10 +18,16 @@ class OpeningHours
     private ?string $day = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $openingHour = null;
+    private ?\DateTimeInterface $morningOpeningHour = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $closingHour = null;
+    private ?\DateTimeInterface $morningClosingHour = null;
+
+    #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $eveningOpeningHour = null;
+
+    #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $eveningClosingHour = null;
 
     public function getId(): ?int
     {
@@ -40,26 +46,50 @@ class OpeningHours
         return $this;
     }
 
-    public function getOpeningHour(): ?\DateTimeInterface
+    public function getMorningOpeningHour(): ?\DateTimeInterface
     {
-        return $this->openingHour;
+        return $this->morningOpeningHour;
     }
 
-    public function setOpeningHour(?\DateTimeInterface $openingHour): self
+    public function setMorningOpeningHour(?\DateTimeInterface $morningOpeningHour): self
     {
-        $this->openingHour = $openingHour;
+        $this->morningOpeningHour = $morningOpeningHour;
 
         return $this;
     }
 
-    public function getClosingHour(): ?\DateTimeInterface
+    public function getMorningClosingHour(): ?\DateTimeInterface
     {
-        return $this->closingHour;
+        return $this->morningClosingHour;
     }
 
-    public function setClosingHour(?\DateTimeInterface $closingHour): self
+    public function setMorningClosingHour(?\DateTimeInterface $morningClosingHour): self
     {
-        $this->closingHour = $closingHour;
+        $this->morningClosingHour = $morningClosingHour;
+
+        return $this;
+    }
+
+    public function getEveningOpeningHour(): ?\DateTimeInterface
+    {
+        return $this->eveningOpeningHour;
+    }
+
+    public function setEveningOpeningHour(?\DateTimeInterface $eveningOpeningHour): self
+    {
+        $this->eveningOpeningHour = $eveningOpeningHour;
+
+        return $this;
+    }
+
+    public function getEveningClosingHour(): ?\DateTimeInterface
+    {
+        return $this->eveningClosingHour;
+    }
+
+    public function setEveningClosingHour(?\DateTimeInterface $eveningClosingHour): self
+    {
+        $this->eveningClosingHour = $eveningClosingHour;
 
         return $this;
     }

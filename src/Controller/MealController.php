@@ -71,12 +71,31 @@ class MealController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_meal_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Meal $meal, MealRepository $mealRepository): Response
+    public function edit(Request $request, Meal $meal, MealRepository $mealRepository, SluggerInterface $slugger): Response
     {
         $form = $this->createForm(MealType::class, $meal);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $image = $form->get('image')->getData();
+            if ($image) {
+                $originalFilename  = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$image->guessExtension();
+
+                try {
+                    $image->move(
+                        $this->getParameter('images_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+
+                }
+
+                $meal->setImage($newFilename);
+            }
             $mealRepository->save($meal, true);
 
             return $this->redirectToRoute('app_meal_index', [], Response::HTTP_SEE_OTHER);

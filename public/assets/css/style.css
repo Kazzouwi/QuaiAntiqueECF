@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind:wght@600&family=Montserrat:wght@700&display=swap');
+
+body {
+    margin: 0px;
+    background-color: #E4DDCD;
+}
+
+.header {
+    background-color: #392C1E;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    height: 125px;
+}
+
+.logo {
+    width: 85px;
+    height: 85px;
+    margin-left: 25px;
+    border-radius: 8px;
+}
+
+.title {
+    position: absolute;
+    left: 40%;
+    color: #E10000;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3rem;
+}
+
+button {
+    height: 50px;
+    width: 150px;
+    background-color: #E10000;
+    color: #E4DDCD;
+    font-family: 'Hind', sans-serif;
+    font-size: 1.5rem;
+    border-radius: 5px;
+    border: none;
+    margin-right: 25px;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+main h2 {
+    margin-left: 15px;
+    font-size: 2rem;
+}
+
+main {
+    background-color: #E4DDCD;
+}
+
+.mealDisplay {
+    padding-top: 100px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    position: relative;
+}
+
+.oneMeal {
+    position: relative;
+}
+
+
+.mealName {
+    display: none;
+}
+
+.mealImage {
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.oneMeal:hover > .mealName {
+    display: flex;
+    position: absolute;
+    top: -60px;
+}
+
+.reservation {
+    margin-top: 100px;
+    margin-bottom: 100px;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.reservation-btn {
+    height: 90px;
+    width: 250px;  
+    font-size: 2rem;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px black ;
+}
+
+
+.footer {
+    height: 150px;
+    display: grid;
+    grid-template-columns: 75% 1fr;
+    background-color: #E4DDCD;
+    border-top: solid 2px #392C1E;
+}
+
+.schedule {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.schedule h4 {
+    padding-left: 10px;
+    color: #E10000;
+}
+
+.schedule li {
+    list-style: none;
+    margin-right: 25px;
+    margin-left: -15px;
+}
+
+.contact {
+    border-left: solid 2px #392C1E;
+}
+
+.time {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

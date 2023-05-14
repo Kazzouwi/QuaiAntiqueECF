@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    {{ encore_entry_link_tags('app') }}
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 </head>
 <body>
 
@@ -14,8 +14,9 @@
         <a href="{{ path('home') }}"><img src="{{ asset('/assets/img/Quai_antique.png')}}" alt="logo" class="logo"></a>
         <h1 class="title">Quai antique</h1>
         <div class="buttons">
-        <button type="button" class="carte" onclick="window.location.href='{{ path('menu') }}';">Carte</button>
-        <button type="button" class="connexion">Connection</button>
+            <button type="button" class="carte" onclick="window.location.href='{{ path('menu') }}';">Carte</button>
+            <button type="button" class="connexion">Connection</button>
+        </div>
     {% endblock header %}
 </header>
 
@@ -25,9 +26,8 @@
     {% endblock main %}
 </main>
 
-<footer>
+<footer class="footer">
     {% block footer %}
-        <h3>Horaires d'ouvertures :<h3>
     {% endblock footer %}
 </footer>
 

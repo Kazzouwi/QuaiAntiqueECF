@@ -9,9 +9,9 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
-                <th>IsAllergen</th>
-                <th>actions</th>
+                <th>Nom</th>
+                <th>Allergène ?</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -21,8 +21,8 @@
                 <td>{{ ingredient.name }}</td>
                 <td>{{ ingredient.isAllergen ? 'Yes' : 'No' }}</td>
                 <td>
-                    <a href="{{ path('app_ingredient_show', {'id': ingredient.id}) }}">show</a>
-                    <a href="{{ path('app_ingredient_edit', {'id': ingredient.id}) }}">edit</a>
+                    <a href="{{ path('app_ingredient_show', {'id': ingredient.id}) }}">Afficher</a>
+                    <a href="{{ path('app_ingredient_edit', {'id': ingredient.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -33,5 +33,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_ingredient_new') }}">Create new</a>
+    <a href="{{ path('app_ingredient_new') }}">Ajouter un ingredient</a>
+
+    <a href="{{ path('app_meal_index') }}">Voir les plats</a>
 {% endblock %}

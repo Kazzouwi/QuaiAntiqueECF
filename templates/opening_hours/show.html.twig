@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}OpeningHours{% endblock %}
+
+{% block main %}
+    <h1>OpeningHours</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ opening_hour.id }}</td>
+            </tr>
+            <tr>
+                <th>Day</th>
+                <td>{{ opening_hour.day }}</td>
+            </tr>
+            <tr>
+                <th>MorningOpeningHour</th>
+                <td>{{ opening_hour.morningOpeningHour ? opening_hour.morningOpeningHour|date('H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>MorningClosingHour</th>
+                <td>{{ opening_hour.morningClosingHour ? opening_hour.morningClosingHour|date('H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>EveningOpeningHour</th>
+                <td>{{ opening_hour.eveningOpeningHour ? opening_hour.eveningOpeningHour|date('H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>EveningClosingHour</th>
+                <td>{{ opening_hour.eveningClosingHour ? opening_hour.eveningClosingHour|date('H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_opening_hours_index') }}">back to list</a>
+
+    <a href="{{ path('app_opening_hours_edit', {'id': opening_hour.id}) }}">edit</a>
+
+    {{ include('opening_hours/_delete_form.html.twig') }}
+{% endblock %}
