@@ -26,7 +26,7 @@ class Meal
     #[ORM\Column(nullable: true)]
     private ?string $image = null;
 
-    #[ORM\ManyToMany(targetEntity: Ingredient::class, mappedBy: 'mealList')]
+    #[ORM\ManyToMany(targetEntity: Ingredient::class, inversedBy: 'mealList')]
     private Collection $ingredients;
 
     #[ORM\Column(length: 255)]
@@ -93,7 +93,6 @@ class Meal
     {
         if (!$this->ingredients->contains($ingredient)) {
             $this->ingredients->add($ingredient);
-            $ingredient->addMealList($this);
         }
 
         return $this;
@@ -101,9 +100,7 @@ class Meal
 
     public function removeIngredient(Ingredient $ingredient): self
     {
-        if ($this->ingredients->removeElement($ingredient)) {
-            $ingredient->removeMealList($this);
-        }
+        $this->ingredients->removeElement($ingredient);
 
         return $this;
     }

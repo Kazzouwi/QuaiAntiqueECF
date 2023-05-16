@@ -24,6 +24,7 @@
                     <a href="{{ path('app_ingredient_show', {'id': ingredient.id}) }}">Afficher</a>
                     <a href="{{ path('app_ingredient_edit', {'id': ingredient.id}) }}">Modifier</a>
                 </td>
+                </td> {{ dump(ingredient.mealList)}}</td>
             </tr>
         {% else %}
             <tr>

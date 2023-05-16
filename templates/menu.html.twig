@@ -17,6 +17,9 @@
                 <div class="description">
                     <h3>{{ meal.name }} :</h3>
                     <p>{{ meal.price }}€</p>
+                    {% for ingredient in meal.ingredients %}
+                        <p>{{ ingredient.name }}, </p>
+                    {% endfor %}
                 </div>
                 {% endif %}
             {% endfor %}
@@ -28,6 +31,9 @@
                 <div class="description">
                     <h3>{{ meal.name }} :</h3>
                     <p>{{ meal.price }}€</p>
+                    {% for ingredient in meal.ingredients %}
+                        <p>{{ ingredient.name }}, </p>
+                    {% endfor %}
                 </div>
                 {% endif %}
             {% endfor %}
@@ -39,6 +45,9 @@
                 <div class="description">
                     <h3>{{ meal.name }} :</h3>
                     <p>{{ meal.price }}€</p>
+                    {% for ingredient in meal.ingredients %}
+                        <p>{{ ingredient.name }}, </p>
+                    {% endfor %}
                 </div>
                 {% endif %}
             {% endfor %}

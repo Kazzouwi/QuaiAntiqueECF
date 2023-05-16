@@ -45,8 +45,9 @@ class TableRepository extends ServiceEntityRepository
 
         $query = $queryBuilder
             ->select('table')
-            ->where('table.places LIKE :guests')
+            ->where('table.places BETWEEN :guests AND :fillTable')
             ->setParameter('guests', $guests)
+            ->setParameter('fillTable', $guests + 1)
             ->getQuery();
 
         return $query->getResult();

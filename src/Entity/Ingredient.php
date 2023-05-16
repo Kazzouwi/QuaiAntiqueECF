@@ -21,7 +21,7 @@ class Ingredient
     #[ORM\Column]
     private ?bool $isAllergen = null;
 
-    #[ORM\ManyToMany(targetEntity: Meal::class, inversedBy: 'ingredients')]
+    #[ORM\ManyToMany(targetEntity: Meal::class, mappedBy: 'ingredients')]
     private Collection $mealList;
 
     public function __construct()
@@ -59,8 +59,8 @@ class Ingredient
     }
 
     /**
-     * @return Collection<int, Meal>
-     */
+    * @return Collection<int, Meal>
+    */
     public function getMealList(): Collection
     {
         return $this->mealList;
@@ -70,14 +70,17 @@ class Ingredient
     {
         if (!$this->mealList->contains($mealList)) {
             $this->mealList->add($mealList);
+            $mealList->addIngredient($this);
         }
 
         return $this;
     }
 
-    public function removeMealList(Meal $mealList): self
+    public function removeIngredient(Meal $mealList): self
     {
-        $this->mealList->removeElement($mealList);
+        if ($this->mealList->removeElement($mealList)) {
+            $mealList->removeIngredient($this);
+        }
 
         return $this;
     }
