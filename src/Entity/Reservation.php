@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ReservationRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -22,6 +24,10 @@ class Reservation
 
     #[ORM\Column]
     private ?int $numberOfPeople = null;
+
+    #[ORM\ManyToOne(inversedBy: 'tableReservation')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Table $reservationTable = null;
 
     public function getId(): ?int
     {
@@ -60,6 +66,18 @@ class Reservation
     public function setNumberOfPeople(int $numberOfPeople): self
     {
         $this->numberOfPeople = $numberOfPeople;
+
+        return $this;
+    }
+
+    public function getReservationTable(): ?Table
+    {
+        return $this->reservationTable;
+    }
+
+    public function setReservationTable(?Table $reservationTable): self
+    {
+        $this->reservationTable = $reservationTable;
 
         return $this;
     }

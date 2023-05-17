@@ -2,9 +2,12 @@
     <label for="places">Rechercher tables</label>
     <input type="number" name="places" min="1" max="10" onchange="searchByPlaces(this.value);">
     <input type="submit">
+    <label for="reservation">Date de la reservation</label>
+    <input type="date" id="reservation">
 </form>
 
 <h1>Liste des tables : </h1>
 {% for table in tables %}
     <h1>{{ table.number }}</h1>
+    <p>{{ table.tableReservation.hour ? table.tableReservation.hour|date('H:i') : '' }}
 {% endfor %}

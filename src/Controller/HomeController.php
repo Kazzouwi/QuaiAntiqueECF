@@ -15,7 +15,7 @@ class HomeController extends AbstractController
     #[Route('/', name: 'home')]
     public function home(MealRepository $mealRepository, Request $request, OpeningHoursRepository $openingHoursRepository)
     {
-        $meals = $mealRepository->findBy(['isFavorite' => 'true'], ['id' => 'ASC'], 4);
+        $meals = $mealRepository->findBy(['isFavorite' => 'true'], ['id' => 'ASC'], 5);
         $openingHours = $openingHoursRepository->findAll();
         
         return $this->render('home.html.twig', [

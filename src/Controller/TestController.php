@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\OpeningHoursRepository;
+use App\Repository\ReservationRepository;
 use App\Repository\TableRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,7 +27,7 @@ class TestController extends AbstractController
     }
 
     #[Route('/reservation/search', name: 'reservation_search')]
-    public function searchReservation(OpeningHoursRepository $openingHoursRepository, TableRepository $tableRepository, Request $request)
+    public function searchReservation(OpeningHoursRepository $openingHoursRepository, TableRepository $tableRepository, ReservationRepository $reservationRepository, Request $request)
     {
         $openingHours = $openingHoursRepository->findAll();
 
@@ -34,9 +35,13 @@ class TestController extends AbstractController
 
         $tables = $tableRepository->searchByPlaces($places);
 
+        $reservations = $reservationRepository->findAll();
+        
+
         return $this->render('testSearch.html.twig', [
             'opening_hours' => $openingHours,
-            'tables' => $tables
+            'tables' => $tables,
+            'reservations' => $reservations
         ]);
     }
 
