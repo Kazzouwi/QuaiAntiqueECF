@@ -46,6 +46,11 @@ class Reservation
         return $this;
     }
 
+    public function getDateTimestamp()
+    {
+        return $this->date->getTimestamp();
+    }
+
     public function getHour(): ?\DateTimeInterface
     {
         return $this->hour;
@@ -56,6 +61,11 @@ class Reservation
         $this->hour = $hour;
 
         return $this;
+    }
+
+    public function getHourTimestamp()
+    {
+        return $this->hour->getTimestamp();
     }
 
     public function getNumberOfPeople(): ?int
@@ -81,4 +91,6 @@ class Reservation
 
         return $this;
     }
+
+
 }

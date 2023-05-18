@@ -1,3 +1,34 @@
+{% extends "base.html.twig" %}
+
+{% block main %}
+
+
+
+
+
+
 {% for table in tables %}
-    <h1>{{ table.number }}</h1>
+    {% if table.tableReservation is empty %}
+    {% else %}
+        <ul>
+            {% for reservation in table.tableReservation %}
+                {% if loop.index == 1  %}
+                    {% for resa in reservations %}
+                        {% if reservation.date == resa.date %}
+                            <button type="button" class="reservation-btn" onclick="window.location.href='{{ path('reservation') }}';">{{ resa.hour|date('H:i')}}</button>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+            
+        </ul>
+    {% endif %}
 {% endfor %}
+
+{% endblock %}
+
+
+
+
+
+

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Table;
 use App\Repository\OpeningHoursRepository;
 use App\Repository\ReservationRepository;
 use App\Repository\TableRepository;
@@ -29,19 +30,44 @@ class TestController extends AbstractController
     #[Route('/reservation/search', name: 'reservation_search')]
     public function searchReservation(OpeningHoursRepository $openingHoursRepository, TableRepository $tableRepository, ReservationRepository $reservationRepository, Request $request)
     {
-        $openingHours = $openingHoursRepository->findAll();
-
         $places = $request->query->get('places');
 
         $tables = $tableRepository->searchByPlaces($places);
+        
+        $date = $request->query->get('date');
 
-        $reservations = $reservationRepository->findAll();
+        $reservations = $reservationRepository->searchByDate($date);
+
+        $dateTime = strtotime($date);
+
+        $day = date("l", $dateTime);
+
+        $openingHours = $openingHoursRepository->searchByDay($day);
+
+        $mOH = $openingHours->getMorningOpeningHour();
+        $mCH = $openingHours->getMorningClosingHour();
+        
+        $mOHTimestamp = $mOH->getTimestamp();
+        $mCHTimestamp = $mCH->getTimestamp();
+
+        $interval = 900;
+        
+        $numberOfInterval = (( $mCHTimestamp - $mOHTimestamp ) / $interval) - 3;
+
+        $listOfInterval = [];
+
+        for($i = 0 ; $i < $numberOfInterval ; $i++) {
+            $listOfInterval = [...$listOfInterval, $mOHTimestamp + ($i*$interval)];
+        }
+
+        dd($listOfInterval);
         
 
         return $this->render('testSearch.html.twig', [
-            'opening_hours' => $openingHours,
             'tables' => $tables,
-            'reservations' => $reservations
+            'reservations' => $reservations,
+            'list_of_interval' => $listOfInterval,
+            'number_of_interval' => $numberOfInterval
         ]);
     }
 
@@ -71,5 +97,13 @@ class TestController extends AbstractController
             'list_of_interval' => $listOfInterval,
             'number_of_interval' => $numberOfInterval
         ]);
+    }
+
+    #[Route('/show/test/{id}', name: 'show_test')]
+    public function showTest(Table $table)
+    {
+        return $this->render('showTest.html.twig', [
+            'table' => $table,
+        ]);  
     }
 }

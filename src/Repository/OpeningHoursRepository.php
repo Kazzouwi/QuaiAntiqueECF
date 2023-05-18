@@ -39,6 +39,43 @@ class OpeningHoursRepository extends ServiceEntityRepository
         }
     }
 
+    public function searchByDay($day)
+    {
+        switch ($day) {
+            case 'Monday':
+                $day = 'Lundi';
+                break;
+            case 'Tuesday':
+                $day = 'Mardi';
+                break;
+            case 'Wednesday':
+                $day = 'Mercredi';
+                break;
+            case 'Thursday':
+                $day = 'Jeudi';
+                break;
+            case 'Friday':
+                $day = 'Vendredi';
+                break;
+            case 'Saturday':
+                $day = 'Samedi';
+                break;
+            case 'Sunday':
+                $day = 'Dimanche';
+                 break;
+        }
+
+        $queryBuilder = $this->createQueryBuilder('openingHours');
+
+        $query = $queryBuilder
+            ->select('openingHours')
+            ->where('openingHours.day LIKE :day')
+            ->setParameter('day', $day)
+            ->getQuery();
+
+        return $query->getSingleResult();
+    }
+
 //    /**
 //     * @return OpeningHours[] Returns an array of OpeningHours objects
 //     */

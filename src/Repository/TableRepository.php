@@ -52,6 +52,32 @@ class TableRepository extends ServiceEntityRepository
 
         return $query->getResult();
     }
+    
+    public function findTablesDisponibles($date, $nombrePersonnes)
+    {
+        $queryBuilder = $this->createQueryBuilder('t');
+        $queryBuilder->leftJoin('t.reservations', 'r')
+            ->andWhere('r.date = :date')
+            ->setParameter('date', $date)
+            ->groupBy('t')
+            ->having('t.nombrePlaces >= :nombrePersonnes')
+            ->setParameter('nombrePersonnes', $nombrePersonnes)
+            ->andWhere($queryBuilder->expr()->not($queryBuilder->expr()->exists(
+                $this->createQueryBuilder('t2')
+                    ->select('r2')
+                    ->from('App\Entity\Reservation', 'r2')
+                    ->where('r2.table = t')
+                    ->andWhere('r2.date = :date')
+                    ->getDQL()
+            )))
+            ->setParameter('date', $date);
+
+        $query = $queryBuilder->getQuery();
+        $tablesDisponibles = $query->getResult();
+
+        return $tablesDisponibles;
+    }
+
 
 //    /**
 //     * @return Table[] Returns an array of Table objects
