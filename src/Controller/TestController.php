@@ -9,6 +9,7 @@ use App\Repository\TableRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\Length;
 
 class TestController extends AbstractController
 {
@@ -36,7 +37,7 @@ class TestController extends AbstractController
         
         $date = $request->query->get('date');
 
-        $reservations = $reservationRepository->searchByDate($date);
+        $reservations = $reservationRepository->searchByDate($date, $places);
 
         $dateTime = strtotime($date);
 
@@ -44,30 +45,58 @@ class TestController extends AbstractController
 
         $openingHours = $openingHoursRepository->searchByDay($day);
 
+        if ( $openingHours->getMorningOpeningHour() == false and $openingHours->getEveningOpeningHour() == false) {
+            return $this->render('closed.html.twig');
+        }
+
+        
+
         $mOH = $openingHours->getMorningOpeningHour();
         $mCH = $openingHours->getMorningClosingHour();
+        $eOH = $openingHours->getEveningOpeningHour();
+        $eCH = $openingHours->getEveningClosingHour();
         
         $mOHTimestamp = $mOH->getTimestamp();
         $mCHTimestamp = $mCH->getTimestamp();
+        $eOHTimestamp = $eOH->getTimestamp();
+        $eCHTimestamp = $eCH->getTimestamp();
 
         $interval = 900;
         
-        $numberOfInterval = (( $mCHTimestamp - $mOHTimestamp ) / $interval) - 3;
+        $numberOfIntervalMorning = (( $mCHTimestamp - $mOHTimestamp ) / $interval) - 3;
+        $numberOfIntervalEvening = (( $eCHTimestamp - $eOHTimestamp ) / $interval) - 3;
 
         $listOfInterval = [];
 
-        for($i = 0 ; $i < $numberOfInterval ; $i++) {
+        for($i = 0 ; $i < $numberOfIntervalMorning ; $i++) {
             $listOfInterval = [...$listOfInterval, $mOHTimestamp + ($i*$interval)];
         }
 
-        dd($listOfInterval);
-        
+        for($i = 0 ; $i < $numberOfIntervalEvening ; $i++) {
+            $listOfInterval = [...$listOfInterval, $eOHTimestamp + ($i*$interval)];
+        }
 
+        foreach($reservations as $reservation){
+           $rHour = $reservation->getHour();
+           $rHourTimeStamp = $rHour->getTimestamp();
+
+           $position = array_search($rHourTimeStamp, $listOfInterval);
+
+            if ( $position !== false ) {
+                $startingIndex = max(0, $position - 3);
+                $endingIndex = min(count($listOfInterval) - 1, $position + 3);
+
+                array_splice($listOfInterval, $startingIndex, $endingIndex - $startingIndex + 1);
+                unset($listOfInterval[$position]);
+            }
+        }
+
+        $numberOfFreeTime = count($listOfInterval);
         return $this->render('testSearch.html.twig', [
             'tables' => $tables,
             'reservations' => $reservations,
             'list_of_interval' => $listOfInterval,
-            'number_of_interval' => $numberOfInterval
+            'number_of_free_time' => $numberOfFreeTime
         ]);
     }
 

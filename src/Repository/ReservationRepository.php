@@ -39,14 +39,26 @@ class ReservationRepository extends ServiceEntityRepository
         }
     }
 
-    public function searchByDate($date) 
+    public function searchByDate($date, $places) 
     {
         $queryBuilder = $this->createQueryBuilder('reservation');
 
+        if ( $places % 2 == 0 ) {
+            $peopleMin = $places - 1;
+            $peopleMax = $places;
+        } else {
+            $peopleMin = $places;
+            $peopleMax = $places + 1;
+        }
+        
+
         $query = $queryBuilder
             ->select('reservation')
-            ->where('reservation.date = :date')
+            ->where('reservation.numberOfPeople BETWEEN :peopleMin AND :peopleMax')
+            ->andWhere('reservation.date = :date')
             ->setParameter('date', $date)
+            ->setParameter('peopleMin', $peopleMin)
+            ->setParameter('peopleMax', $peopleMax)
             ->getQuery();
 
         return $query->getResult();

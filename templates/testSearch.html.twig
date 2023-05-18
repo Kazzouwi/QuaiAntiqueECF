@@ -2,29 +2,12 @@
 
 {% block main %}
 
-
-
-
-
-
-{% for table in tables %}
-    {% if table.tableReservation is empty %}
-    {% else %}
-        <ul>
-            {% for reservation in table.tableReservation %}
-                {% if loop.index == 1  %}
-                    {% for resa in reservations %}
-                        {% if reservation.date == resa.date %}
-                            <button type="button" class="reservation-btn" onclick="window.location.href='{{ path('reservation') }}';">{{ resa.hour|date('H:i')}}</button>
-                        {% endif %}
-                    {% endfor %}
-                {% endif %}
-            {% endfor %}
-            
-        </ul>
-    {% endif %}
-{% endfor %}
-
+<div class="free">
+    {% set k = number_of_free_time %}
+    {% for i in 0..k-1 %}
+        <button type="button" class="free-time">{{ list_of_interval[i]|date("H:i") }}</button>
+    {% endfor %}
+</div>
 {% endblock %}
 
 
