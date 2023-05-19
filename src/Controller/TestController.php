@@ -49,6 +49,12 @@ class TestController extends AbstractController
             return $this->render('closed.html.twig');
         }
 
+        if ($tables == false) {
+            return $this->render('full.html.twig', [
+                'places' => $places
+            ]);
+        }
+
         
 
         $mOH = $openingHours->getMorningOpeningHour();
@@ -76,20 +82,32 @@ class TestController extends AbstractController
             $listOfInterval = [...$listOfInterval, $eOHTimestamp + ($i*$interval)];
         }
 
-        foreach($reservations as $reservation){
-           $rHour = $reservation->getHour();
-           $rHourTimeStamp = $rHour->getTimestamp();
+        $resetList = $listOfInterval;
 
-           $position = array_search($rHourTimeStamp, $listOfInterval);
+        $newArray = [];
+        foreach ($tables as $table) {
+            foreach($reservations as $reservation){
+                if ( $reservation->getReservationTable()->getId() == $table->getId()) {
+                    $rHour = $reservation->getHour();
+                    $rHourTimeStamp = $rHour->getTimestamp();
 
-            if ( $position !== false ) {
-                $startingIndex = max(0, $position - 3);
-                $endingIndex = min(count($listOfInterval) - 1, $position + 3);
+                    $position = array_search($rHourTimeStamp, $listOfInterval);
 
-                array_splice($listOfInterval, $startingIndex, $endingIndex - $startingIndex + 1);
-                unset($listOfInterval[$position]);
+
+                        if ( $position !== false ) {
+                            $startingIndex = max(0, $position - 3);
+                            $endingIndex = min(count($listOfInterval) - 1, $position + 3);
+
+                            array_splice($listOfInterval, $startingIndex, $endingIndex - $startingIndex + 1);
+                            unset($listOfInterval[$position]);
+
+                        }
+                } else {
+                    $listOfInterval = $resetList;
+                }                
             }
         }
+        sort($listOfInterval);
 
         $numberOfFreeTime = count($listOfInterval);
         return $this->render('testSearch.html.twig', [
