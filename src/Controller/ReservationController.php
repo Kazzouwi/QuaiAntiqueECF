@@ -3,15 +3,20 @@
 namespace App\Controller;
 
 use App\Entity\Table;
+use App\Entity\Reservation;
 use App\Repository\OpeningHoursRepository;
 use App\Repository\ReservationRepository;
 use App\Repository\TableRepository;
+use DateInterval;
+use DateTime;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\Length;
 
-class TestController extends AbstractController
+class ReservationController extends AbstractController
 {
     #[Route('/reservation', name: 'reservation')]
     public function createReservation(OpeningHoursRepository $openingHoursRepository, TableRepository $tableRepository, Request $request)
@@ -22,7 +27,7 @@ class TestController extends AbstractController
 
         $tables = $tableRepository->searchByPlaces($places);
 
-        return $this->render('test.html.twig', [
+        return $this->render('reservation/reservation.html.twig', [
             'opening_hours' => $openingHours,
             'tables' => $tables
         ]);
@@ -41,16 +46,20 @@ class TestController extends AbstractController
 
         $dateTime = strtotime($date);
 
+        $dateFormat = new DateTime();
+
+        $dateFormat->setTimestamp($dateTime);
+
         $day = date("l", $dateTime);
 
         $openingHours = $openingHoursRepository->searchByDay($day);
 
         if ( $openingHours->getMorningOpeningHour() == false and $openingHours->getEveningOpeningHour() == false) {
-            return $this->render('closed.html.twig');
+            return $this->render('reservation/reservationClosed.html.twig');
         }
 
         if ($tables == false) {
-            return $this->render('full.html.twig', [
+            return $this->render('reservation/reservatioFull.html.twig', [
                 'places' => $places
             ]);
         }
@@ -110,47 +119,37 @@ class TestController extends AbstractController
         sort($listOfInterval);
 
         $numberOfFreeTime = count($listOfInterval);
-        return $this->render('testSearch.html.twig', [
+        return $this->render('reservation/reservationSearch.html.twig', [
             'tables' => $tables,
             'reservations' => $reservations,
             'list_of_interval' => $listOfInterval,
-            'number_of_free_time' => $numberOfFreeTime
+            'number_of_free_time' => $numberOfFreeTime,
+            'date' => $date,
+            'numberOfPeople' => $places
         ]);
     }
 
-    #[Route('/interval/{id}', name: 'interval')]
-    public function timeInterval(OpeningHoursRepository $openingHoursRepository, $id)
+    #[Route('reservation/new', name: 'reservation_new')]
+    public function newReservation(EntityManagerInterface $entityManager, Request $request, )
     {
-        $openingHours = $openingHoursRepository->find($id);
-
-        $mOH = $openingHours->getMorningOpeningHour();
-        $mCH = $openingHours->getMorningClosingHour();
         
-        $mOHTimestamp = $mOH->getTimestamp();
-        $mCHTimestamp = $mCH->getTimestamp();
+        $data = json_decode($request->getContent(), true);
 
-        $interval = 900;
-        
-        $numberOfInterval = (( $mCHTimestamp - $mOHTimestamp ) / $interval) - 3;
+        $date = $data['date'];
 
-        $listOfInterval = [];
+        $date = new DateInterval($date);
 
-        for($i = 0 ; $i < $numberOfInterval ; $i++) {
-            $listOfInterval = [...$listOfInterval, $mOHTimestamp + ($i*$interval)];
-        }
-        
+        $reservation = new Reservation();
+        $reservation
+            ->setDate($date)
+            ->setHour($data['hour'])
+            ->setNumberOfPeople($data['numberOfPeople'])
+            ->setReservationTable($data['reservationTable']);
 
-        return $this->render('interval.html.twig', [
-            'list_of_interval' => $listOfInterval,
-            'number_of_interval' => $numberOfInterval
-        ]);
-    }
+        $entityManager->persist($reservation);
+        $entityManager->flush();
 
-    #[Route('/show/test/{id}', name: 'show_test')]
-    public function showTest(Table $table)
-    {
-        return $this->render('showTest.html.twig', [
-            'table' => $table,
-        ]);  
+        return $this->render('reservationSucces.html.twig');
+
     }
 }

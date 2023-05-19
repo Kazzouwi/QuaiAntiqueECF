@@ -1,0 +1,72 @@
+{% extends "base.html.twig" %}
+
+{% block main %}
+
+<div class="free">
+    {% set k = number_of_free_time %}
+    {% for i in 0..k-1 %}
+        <button type="button" class="free-time" onclick="reservation()" >{{ list_of_interval[i]|date("H:i") }}</button>
+    {% endfor %}
+</div>
+
+<script>
+function reservation() {
+    var buttons = document.getElementsByClassName('free-time');
+
+    var buttonValue;
+
+    for (var i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener('click', function(event) {
+        buttonValue = event.target.innerHTML;
+    });
+    }
+
+
+
+    var date = '{{ date }}';
+    var hour = buttonValue;
+    var numberOfPeople = {{ numberOfPeople }}
+
+
+    var url = 'new';
+
+    var data = {
+    date: date,
+    hour: hour,
+    numberOfPeople: numberOfPeople,
+    table: '1'
+    };
+
+    fetch(url, {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+    })
+    .then(function(response) {
+        if (response.ok) {
+        return response.json();
+        }
+        throw new Error('Erreur HTTP ' + response.status);
+    })
+    .then(function(data) {
+        // Traitement de la réponse JSON
+        console.log(data);
+    })
+    .catch(function(error) {
+        // Gestion des erreurs
+        console.error(error);
+    });
+
+}
+
+
+</script>
+{% endblock %}
+
+
+
+
+
+

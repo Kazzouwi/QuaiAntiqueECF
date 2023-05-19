@@ -10,11 +10,6 @@
     <input type="submit">
 </form>
 
-<h1>Liste des tables : </h1>
-{% for table in tables %}
-    <h1>{{ table.number }}</h1>
-    <p>{{ table.tableReservation.hour ? table.tableReservation.hour|date('H:i') : '' }}
-{% endfor %}
 
 
 {% endblock %}
