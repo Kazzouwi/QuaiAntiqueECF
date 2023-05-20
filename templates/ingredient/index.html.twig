@@ -10,7 +10,7 @@
             <tr>
                 <th>Id</th>
                 <th>Nom</th>
-                <th>Allergène ?</th>
+                <th>Est un allergène</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -19,12 +19,11 @@
             <tr>
                 <td>{{ ingredient.id }}</td>
                 <td>{{ ingredient.name }}</td>
-                <td>{{ ingredient.isAllergen ? 'Yes' : 'No' }}</td>
+                <td>{{ ingredient.isAllergen ? 'Oui' : 'Non' }}</td>
                 <td>
                     <a href="{{ path('app_ingredient_show', {'id': ingredient.id}) }}">Afficher</a>
                     <a href="{{ path('app_ingredient_edit', {'id': ingredient.id}) }}">Modifier</a>
                 </td>
-                </td> {{ dump(ingredient.mealList)}}</td>
             </tr>
         {% else %}
             <tr>

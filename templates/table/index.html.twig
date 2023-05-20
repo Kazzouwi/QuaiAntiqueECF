@@ -10,7 +10,7 @@
             <tr>
                 <th>Id</th>
                 <th>Places</th>
-                <th>Number</th>
+                <th>Numéro</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -21,8 +21,8 @@
                 <td>{{ table.places }}</td>
                 <td>{{ table.number }}</td>
                 <td>
-                    <a href="{{ path('app_table_show', {'id': table.id}) }}">show</a>
-                    <a href="{{ path('app_table_edit', {'id': table.id}) }}">edit</a>
+                    <a href="{{ path('app_table_show', {'id': table.id}) }}">Afficher</a>
+                    <a href="{{ path('app_table_edit', {'id': table.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -33,5 +33,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_table_new') }}">Create new</a>
+    <a href="{{ path('app_table_new') }}">Créer une table</a>
 {% endblock main %}

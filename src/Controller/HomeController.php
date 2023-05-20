@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 
-use App\Entity\Meal;
+
 use App\Repository\MealRepository;
 use App\Repository\OpeningHoursRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

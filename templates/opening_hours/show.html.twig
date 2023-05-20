@@ -12,31 +12,31 @@
                 <td>{{ opening_hour.id }}</td>
             </tr>
             <tr>
-                <th>Day</th>
+                <th>Jour</th>
                 <td>{{ opening_hour.day }}</td>
             </tr>
             <tr>
-                <th>MorningOpeningHour</th>
+                <th>Heure d'ouverture du midi</th>
                 <td>{{ opening_hour.morningOpeningHour ? opening_hour.morningOpeningHour|date('H:i') : '' }}</td>
             </tr>
             <tr>
-                <th>MorningClosingHour</th>
+                <th>Heure de fermeture du midi</th>
                 <td>{{ opening_hour.morningClosingHour ? opening_hour.morningClosingHour|date('H:i') : '' }}</td>
             </tr>
             <tr>
-                <th>EveningOpeningHour</th>
+                <th>Heure d'ouverture du soir</th>
                 <td>{{ opening_hour.eveningOpeningHour ? opening_hour.eveningOpeningHour|date('H:i') : '' }}</td>
             </tr>
             <tr>
-                <th>EveningClosingHour</th>
+                <th>Heure de fermeture du soir</th>
                 <td>{{ opening_hour.eveningClosingHour ? opening_hour.eveningClosingHour|date('H:i') : '' }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_opening_hours_index') }}">back to list</a>
+    <a href="{{ path('app_opening_hours_index') }}">Retour à la liste</a>
 
-    <a href="{{ path('app_opening_hours_edit', {'id': opening_hour.id}) }}">edit</a>
+    <a href="{{ path('app_opening_hours_edit', {'id': opening_hour.id}) }}">Modifier</a>
 
     {{ include('opening_hours/_delete_form.html.twig') }}
 {% endblock %}

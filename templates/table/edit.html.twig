@@ -1,13 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Table{% endblock %}
 
 {% block main %}
-    <h1>Edit Table</h1>
+    <h1>Modifier la table</h1>
 
-    {{ include('table/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('table/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-    <a href="{{ path('app_table_index') }}">back to list</a>
+    <a href="{{ path('app_table_index') }}">Retour à la liste</a>
 
     {{ include('table/_delete_form.html.twig') }}
 {% endblock main %}

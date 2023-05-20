@@ -1,11 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Table{% endblock %}
-
 {% block main %}
-    <h1>Create new Table</h1>
+    <h1>Créer une nouvelle table</h1>
 
     {{ include('table/_form.html.twig') }}
 
-    <a href="{{ path('app_table_index') }}">back to list</a>
+    <a href="{{ path('app_table_index') }}">Retour à la liste</a>
 {% endblock %}
