@@ -1,6 +1,6 @@
 {% extends "base.html.twig" %}
 
 {% block main %}
-    <h1>Désolé nous n'avons plus de table pour {{ places }} personnes</h1>
+    <h1>Désolé nous n'avons plus de table pour {{ places }} personnes ce jour</h1>
     <button type="button" class="reservation-btn" onclick="window.location.href='{{ path('reservation') }}';">Réservation</button>
 {% endblock %}

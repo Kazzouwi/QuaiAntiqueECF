@@ -2,31 +2,32 @@
 
 {% block main %}
 
-<div class="free">
-    {% set k = number_of_free_time %}
-    {% for i in 0..k-1 %}
-        <button type="button" class="free-time" onclick="reservation()" >{{ list_of_interval[i]|date("H:i") }}</button>
-    {% endfor %}
-</div>
+{% set k = number_of_free_time %}
+{% for i in 0..k-1 %}
+    <button type="button" class="free-time">{{ list_of_interval[i]|date("H:i") }}</button>
+{% endfor %}
 
 <script>
-function reservation() {
-    var buttons = document.getElementsByClassName('free-time');
 
-    var buttonValue;
+var buttons = document.getElementsByClassName('free-time');
 
-    for (var i = 0; i < buttons.length; i++) {
+var hour;
+
+for (var i = 0; i < buttons.length; i++) {
     buttons[i].addEventListener('click', function(event) {
-        buttonValue = event.target.innerHTML;
+        hour = event.target.innerHTML;
+
+        reservation(hour);
     });
-    }
+}
+
+function reservation(hour) {
+
 
 
 
     var date = '{{ date }}';
-    var hour = buttonValue;
     var numberOfPeople = {{ numberOfPeople }}
-
 
     var url = 'new';
 
@@ -34,7 +35,7 @@ function reservation() {
     date: date,
     hour: hour,
     numberOfPeople: numberOfPeople,
-    table: '1'
+    reservationTable: 4
     };
 
     fetch(url, {
@@ -46,7 +47,7 @@ function reservation() {
     })
     .then(function(response) {
         if (response.ok) {
-        return response.json();
+        console.log('ok');
         }
         throw new Error('Erreur HTTP ' + response.status);
     })
@@ -59,7 +60,14 @@ function reservation() {
         console.error(error);
     });
 
+    setTimeout(() => {
+    window.location.href = '{{path('home')}}'
+    }, 300);
+
+
+
 }
+
 
 
 </script>
