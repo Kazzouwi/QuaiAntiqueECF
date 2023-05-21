@@ -21,7 +21,12 @@ class UserType extends AbstractType
                 'class' => Ingredient::class,
                 'choice_label' => 'name',
                 'expanded' => true,
-                'multiple' => true
+                'multiple' => true,
+                'query_builder' => function ($repository) {
+                    return $repository->createQueryBuilder('i')
+                        ->andWhere('i.isAllergen = :isAllergen')
+                        ->setParameter('isAllergen', true);
+                },
             ])
         ;
     }

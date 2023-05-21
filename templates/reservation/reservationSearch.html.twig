@@ -32,6 +32,8 @@ function reservation(hour) {
 
     var date = '{{ date }}';
     var numberOfPeople = {{ numberOfPeople }}
+    var customer; 
+
 
     var url = 'new';
 
@@ -39,7 +41,8 @@ function reservation(hour) {
     date: date,
     hour: hour,
     numberOfPeople: numberOfPeople,
-    reservationTable: 4
+    customer: "{{ app.user.id }}"
+
     };
 
     fetch(url, {

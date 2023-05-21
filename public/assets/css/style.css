@@ -46,7 +46,7 @@ td, th {
     font-size: 3rem;
 }
 
-button {
+button, .button {
     height: 50px;
     width: 150px;
     background-color: #E10000;
@@ -220,6 +220,7 @@ main {
 
 .reservation-form {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }

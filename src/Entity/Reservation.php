@@ -29,6 +29,9 @@ class Reservation
     #[ORM\JoinColumn(nullable: false)]
     private ?Table $reservationTable = null;
 
+    #[ORM\ManyToOne(inversedBy: 'reservations')]
+    private ?User $customer = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -88,6 +91,18 @@ class Reservation
     public function setReservationTable(?Table $reservationTable): self
     {
         $this->reservationTable = $reservationTable;
+
+        return $this;
+    }
+
+    public function getCustomer(): ?User
+    {
+        return $this->customer;
+    }
+
+    public function setCustomer(?User $customer): self
+    {
+        $this->customer = $customer;
 
         return $this;
     }

@@ -9,7 +9,14 @@
             <input type="number" name="places" min="1" max="10" value={{ app.user.guests }} required>
             <label for="date">Date de la reservation</label>
             <input type="date" name="date" required>
-            <input type="submit">
+            <label for="allergies">Allergies :</label>
+            <div class="reservation-allergies">
+                {% for allergen in allergens %}
+                    <label for="{{ allergen.id }}">{{ allergen.name }} :</label>
+                    <input type="checkbox" id="{{ allergen.id }}" name="{{ allergen.name }}" value="{{ allergen.id }}" {% if app.user.allergen.contains(allergen) %}checked {% endif %}>
+                {% endfor %}
+            </div>
+            <input type="submit" class="button">
         </form>
     </div>
 {% else %}
@@ -20,6 +27,13 @@
         <input type="number" name="places" min="1" max="10" required>
         <label for="date">Date de la reservation</label>
         <input type="date" name="date" required>
+        <label for="allergies">Allergies :</label>
+            <div class="reservation-allergies">
+                {% for allergen in allergens %}
+                    <label for="{{ allergen.id }}">{{ allergen.name }} :</label>
+                    <input type="checkbox" id="{{ allergen.id }}" name="{{ allergen.name }}" value="{{ allergen.id }}">
+                {% endfor %}
+            </div>
         <input type="submit">
     </form>
 </div>

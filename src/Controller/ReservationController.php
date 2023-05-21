@@ -4,6 +4,7 @@ namespace App\Controller;
 
 
 use App\Entity\Reservation;
+use App\Repository\IngredientRepository;
 use App\Repository\OpeningHoursRepository;
 use App\Repository\ReservationRepository;
 use App\Repository\TableRepository;
@@ -19,11 +20,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class ReservationController extends AbstractController
 {
     #[Route('/reservation', name: 'reservation')]
-    public function createReservation()
+    public function createReservation(IngredientRepository $ingredientRepository)
     {
-        
+        $allergens = $ingredientRepository->findBy(['isAllergen' => true]);
 
-        return $this->render('reservation/reservation.html.twig');
+        return $this->render('reservation/reservation.html.twig', [
+            'allergens' => $allergens
+        ]);
     }
 
     #[Route('/admin/reservation', name: 'app_reservation_index')]
@@ -66,6 +69,7 @@ class ReservationController extends AbstractController
                 'places' => $places
             ]);
         }
+
 
         
 
@@ -154,7 +158,7 @@ class ReservationController extends AbstractController
     }
 
     #[Route('reservation/new', name: 'reservation_new')]
-    public function newReservation(EntityManagerInterface $entityManager, Request $request, TableRepository $tableRepository, ReservationRepository $reservationRepository)
+    public function newReservation(EntityManagerInterface $entityManager, Request $request, TableRepository $tableRepository, ReservationRepository $reservationRepository, UserRepository $userRepository)
     {
         
         $data = json_decode($request->getContent(), true);
@@ -176,6 +180,9 @@ class ReservationController extends AbstractController
 
         $hourTimeStamp = strtotime($data['hour']);
 
+        $customerId = $data['customer'];
+
+        $customer = $userRepository->find($customerId); 
 
         $interval = 900;
 
@@ -214,7 +221,8 @@ class ReservationController extends AbstractController
             ->setDate($dateTimeInterface)
             ->setHour($hourTimeInterface)
             ->setNumberOfPeople($data['numberOfPeople'])
-            ->setReservationTable($table);
+            ->setReservationTable($table)
+            ->setCustomer($customer);
 
         $entityManager->persist($reservation);
         $entityManager->flush();
