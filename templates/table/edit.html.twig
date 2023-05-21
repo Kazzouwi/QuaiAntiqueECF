@@ -2,11 +2,13 @@
 
 
 {% block main %}
-    <h1>Modifier la table</h1>
+    <div class="edit">
+        <h1>Modifier la table</h1>
 
-    {{ include('table/_form.html.twig', {'button_label': 'Modifier'}) }}
+        {{ include('table/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-    <a href="{{ path('app_table_index') }}">Retour à la liste</a>
+        <a href="{{ path('app_table_index') }}">Retour à la liste</a>
 
-    {{ include('table/_delete_form.html.twig') }}
+        {{ include('table/_delete_form.html.twig') }}
+    </div>
 {% endblock main %}

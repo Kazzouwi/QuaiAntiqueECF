@@ -9,9 +9,14 @@ h1, h2, h3, h4, h5 {
     font-family: 'Lora', serif;
 }
 
-p {
+p, td, th, a, li {
     font-family: 'Hind', sans-serif;
- }
+}
+
+td, th {
+    padding: 10px;
+}
+
 .header {
     background-color: #392C1E;
     display: flex;
@@ -26,6 +31,11 @@ p {
     height: 85px;
     margin-left: 25px;
     border-radius: 8px;
+}
+
+.logo:hover {
+    width: 95px;
+    height: 95px;
 }
 
 .title {
@@ -51,9 +61,11 @@ button {
 
 button:hover {
     cursor: pointer;
-    font-size: 1.7rem;
 }
 
+.zone-admin, .deconnexion {
+    width: 200px;
+}
 main h2 {
     margin-left: 15px;
     font-size: 2rem;
@@ -110,11 +122,6 @@ main {
     border-radius: 10px;
     box-shadow: 5px 5px 10px black ;
 }
-
-.reservation-btn:hover {
-    font-size: 2.2rem;
-}
-
 
 .footer {
     height: 150px;
@@ -178,15 +185,90 @@ main {
     border-right: solid 2px #392C1E;
 }
 
+.menu-allergen-list {
+    list-style: none;
+}
+
+.menu-allergen {
+    color: rgb(255, 0, 0);
+    display: inline;
+}
+
 .description {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    border-top: solid 2px #392C1E;
 }
 
 .free {
+    margin-top: 50px;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.free-time {
+    margin: 10px;
+}
+
+.reservation-div {
+    text-align: center;
+}
+
+.reservation-form {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: nowrap;
+}
+
+label, input {
+    font-family: 'Hind', sans-serif;
+    margin: 5px;
+}
+
+.table, .meal, .opening_hours, .reservations {
+    margin: 15px;
+    padding: 15px;
+    text-align: center;
+}
+
+.closed-div, .full-div {
+    margin-top: 75px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin-btn, .edit {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.admin-btn button {
+    margin-top: 40px;
+}
+
+.edit form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+}
+
+.edit form > * {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.edit > *, .edit form > * {
+    margin-top: 15px;
 }

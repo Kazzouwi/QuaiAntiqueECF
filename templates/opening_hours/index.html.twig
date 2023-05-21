@@ -20,10 +20,10 @@
             <tr>
                 <td>{{ opening_hour.id }}</td>
                 <td>{{ opening_hour.day }}</td>
-                <td>{{ opening_hour.morningOpeningHour ? opening_hour.morningOpeningHour|date('H:i:s') : '' }}</td>
-                <td>{{ opening_hour.morningClosingHour ? opening_hour.morningClosingHour|date('H:i:s') : '' }}</td>
-                <td>{{ opening_hour.eveningOpeningHour ? opening_hour.eveningOpeningHour|date('H:i:s') : '' }}</td>
-                <td>{{ opening_hour.eveningClosingHour ? opening_hour.eveningClosingHour|date('H:i:s') : '' }}</td>
+                <td>{{ opening_hour.morningOpeningHour ? opening_hour.morningOpeningHour|date('H:i:s') : 'X' }}</td>
+                <td>{{ opening_hour.morningClosingHour ? opening_hour.morningClosingHour|date('H:i:s') : 'X' }}</td>
+                <td>{{ opening_hour.eveningOpeningHour ? opening_hour.eveningOpeningHour|date('H:i:s') : 'X' }}</td>
+                <td>{{ opening_hour.eveningClosingHour ? opening_hour.eveningClosingHour|date('H:i:s') : 'X' }}</td>
                 <td>
                     <a href="{{ path('app_opening_hours_show', {'id': opening_hour.id}) }}">Afficher</a>
                     <a href="{{ path('app_opening_hours_edit', {'id': opening_hour.id}) }}">Modifier</a>

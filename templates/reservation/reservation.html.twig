@@ -1,15 +1,29 @@
 {% extends "base.html.twig" %}
 
 {% block main %}
-
-<form action="{{ path('reservation_search') }}">
-    <label for="places">Rechercher tables</label>
-    <input type="number" name="places" min="1" max="10" required>
-    <label for="date">Date de la reservation</label>
-    <input type="date" name="date" required>
-    <input type="submit">
-</form>
-
+{% if app.user %}
+    <div class="reservation-div">
+        <h1 class="reservation-title">Reservation : </h1>
+        <form action="{{ path('reservation_search') }}" class="reservation-form">
+            <label for="places">Nombres de personnes</label>
+            <input type="number" name="places" min="1" max="10" value={{ app.user.guests }} required>
+            <label for="date">Date de la reservation</label>
+            <input type="date" name="date" required>
+            <input type="submit">
+        </form>
+    </div>
+{% else %}
+    <div class="reservation-div">
+    <h1 class="reservation-title">Reservation : </h1>
+    <form action="{{ path('reservation_search') }}" class="reservation-form">
+        <label for="places">Nombres de personnes</label>
+        <input type="number" name="places" min="1" max="10" required>
+        <label for="date">Date de la reservation</label>
+        <input type="date" name="date" required>
+        <input type="submit">
+    </form>
+</div>
+{% endif %}
 
 
 {% endblock %}

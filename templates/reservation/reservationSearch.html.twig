@@ -2,10 +2,14 @@
 
 {% block main %}
 
-{% set k = number_of_free_time %}
-{% for i in 0..k-1 %}
-    <button type="button" class="free-time">{{ list_of_interval[i]|date("H:i") }}</button>
-{% endfor %}
+
+<h1>Horaires disponibles : </h1>
+<div class="free">
+    {% set k = number_of_free_time %}
+    {% for i in 0..k-1 %}
+        <button type="button" class="free-time">{{ list_of_interval[i]|date("H:i") }}</button>
+    {% endfor %}
+</div>
 
 <script>
 

@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+
+{% block main %}
+    <h1>Liste des reservations</h1>
+
+    <table class="reservations">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Heure</th>
+                <th>Nombre de personnes</th>
+                <th>Table</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reservation in reservations %}
+            <tr>
+                <td>{{ reservation.id }}</td>
+                <td>{{ reservation.date|date("d/m/Y") }}</td>
+                <td>{{ reservation.hour|date("H:i")}}</td>
+                <td>{{ reservation.numberOfPeople }}</td>
+                <td>{{ reservation.reservationTable.number }}
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

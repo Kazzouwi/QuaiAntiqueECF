@@ -7,6 +7,7 @@ use App\Entity\Reservation;
 use App\Repository\OpeningHoursRepository;
 use App\Repository\ReservationRepository;
 use App\Repository\TableRepository;
+use App\Repository\UserRepository;
 use DateTime;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,17 +19,20 @@ use Symfony\Component\Routing\Annotation\Route;
 class ReservationController extends AbstractController
 {
     #[Route('/reservation', name: 'reservation')]
-    public function createReservation(OpeningHoursRepository $openingHoursRepository, TableRepository $tableRepository, Request $request)
+    public function createReservation()
     {
-        $openingHours = $openingHoursRepository->findAll();
+        
 
-        $places = $request->query->get('places');
+        return $this->render('reservation/reservation.html.twig');
+    }
 
-        $tables = $tableRepository->searchByPlaces($places);
+    #[Route('/admin/reservation', name: 'app_reservation_index')]
+    public function showReservation(ReservationRepository $reservationRepository)
+    {
+        $reservations = $reservationRepository->findAll();
 
-        return $this->render('reservation/reservation.html.twig', [
-            'opening_hours' => $openingHours,
-            'tables' => $tables
+        return $this->render('reservation/reservationIndex.html.twig', [
+            'reservations' => $reservations
         ]);
     }
 

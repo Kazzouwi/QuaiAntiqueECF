@@ -1,6 +1,9 @@
 {% extends "base.html.twig" %}
 
 {% block main %}
-    <h1>Désolé nous sommes fermé ce jour</h1>
-    <button type="button" class="reservation-btn" onclick="window.location.href='{{ path('reservation') }}';">Réservation</button>
+    
+    <div class="closed-div">
+        <h1>Désolé nous sommes fermé ce jour</h1>
+        <button type="button" class="reservation-btn" onclick="window.location.href='{{ path('reservation') }}';">Réservation</button>
+    </div>
 {% endblock %}

@@ -10,7 +10,8 @@
             <tr>
                 <th>Type de plat</th>
                 <th>Nom</th>
-                <th>Favoris ?</th>
+                <th>Est Favoris ?</th>
+                <th>Prix</th>
                 <th>Image</th>
                 <th>actions</th>
             </tr>
@@ -20,7 +21,8 @@
             <tr>
                 <td>{{ meal.mealCategory }}</td>
                 <td>{{ meal.name }}</td>
-                <td>{{ meal.isFavorite ? 'Yes' : 'No' }}</td>
+                <td>{{ meal.isFavorite ? 'Oui' : 'Non' }}</td>
+                <td>{{ meal.price }}€</td>
                 {% if meal.image %}
                     <td><img src="{{ asset('/uploads/meal/' ~ meal.image)}}" class="mealImage"/></td>
                 {% else %}

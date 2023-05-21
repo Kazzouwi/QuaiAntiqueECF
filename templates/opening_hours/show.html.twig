@@ -17,19 +17,19 @@
             </tr>
             <tr>
                 <th>Heure d'ouverture du midi</th>
-                <td>{{ opening_hour.morningOpeningHour ? opening_hour.morningOpeningHour|date('H:i') : '' }}</td>
+                <td>{{ opening_hour.morningOpeningHour ? opening_hour.morningOpeningHour|date('H:i') : 'X' }}</td>
             </tr>
             <tr>
                 <th>Heure de fermeture du midi</th>
-                <td>{{ opening_hour.morningClosingHour ? opening_hour.morningClosingHour|date('H:i') : '' }}</td>
+                <td>{{ opening_hour.morningClosingHour ? opening_hour.morningClosingHour|date('H:i') : 'X' }}</td>
             </tr>
             <tr>
                 <th>Heure d'ouverture du soir</th>
-                <td>{{ opening_hour.eveningOpeningHour ? opening_hour.eveningOpeningHour|date('H:i') : '' }}</td>
+                <td>{{ opening_hour.eveningOpeningHour ? opening_hour.eveningOpeningHour|date('H:i') : 'X' }}</td>
             </tr>
             <tr>
                 <th>Heure de fermeture du soir</th>
-                <td>{{ opening_hour.eveningClosingHour ? opening_hour.eveningClosingHour|date('H:i') : '' }}</td>
+                <td>{{ opening_hour.eveningClosingHour ? opening_hour.eveningClosingHour|date('H:i') : 'X' }}</td>
             </tr>
         </tbody>
     </table>

@@ -12,16 +12,24 @@
                 <td>{{ meal.id }}</td>
             </tr>
             <tr>
-                <th>Name</th>
+                <th>Type de plat</th>
+                <td>{{ meal.mealCategory }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
                 <td>{{ meal.name }}</td>
             </tr>
             <tr>
-                <th>IsFavorite</th>
-                <td>{{ meal.isFavorite ? 'Yes' : 'No' }}</td>
+                <th>Est favoris</th>
+                <td>{{ meal.isFavorite ? 'Oui' : 'Non' }}</td>
             </tr>
             <tr>
                 <th>Image</th>
                 <td><img src="{{ asset('/uploads/meal/' ~ meal.image)}}" class="mealImage"/></td>
+            </tr>
+            <tr>
+                <th>Prix :</th>
+                <td>{{ meal.price }}€</td>
             </tr>
         </tbody>
     </table>

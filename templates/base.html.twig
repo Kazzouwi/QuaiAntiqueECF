@@ -21,7 +21,7 @@
             {% if 'ROLE_ADMIN' in roles %}
                 <button type="button" class="zone-admin" onclick="window.location.href='{{ path('admin_dashboard') }}';">Zone admin</button>
             {% endif %}
-                <button type="button" class="deconnexion" onclick="window.location.href='{{ path('app_logout') }}';">Deconnexion</button>
+                <button type="button" class="deconnexion" onclick="window.location.href='{{ path('app_logout') }}';">Déconnexion</button>
             {% else %}
                 <button type="button" class="connexion" onclick="window.location.href='{{ path('app_login') }}';">Connexion</button>
             {% endif %}

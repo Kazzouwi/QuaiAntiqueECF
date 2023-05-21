@@ -1,8 +1,12 @@
 {% extends "base.html.twig" %}
 
 {% block main %}
-    <button type="button" onclick="window.location.href='{{ path('app_opening_hours_index') }}';">Horaires</button>
-    <button type="button" onclick="window.location.href='{{ path('app_ingredient_index') }}';">Ingrédients</button>
-    <button type="button" onclick="window.location.href='{{ path('app_meal_index') }}';">Plats</button>
-    <button type="button" onclick="window.location.href='{{ path('app_table_index') }}';">Tables</button>
+    <div class="admin-btn"> 
+        <h1>Zone admin</h1>
+        <button type="button" onclick="window.location.href='{{ path('app_opening_hours_index') }}';">Horaires</button>
+        <button type="button" onclick="window.location.href='{{ path('app_ingredient_index') }}';">Ingrédients</button>
+        <button type="button" onclick="window.location.href='{{ path('app_meal_index') }}';">Plats</button>
+        <button type="button" onclick="window.location.href='{{ path('app_table_index') }}';">Tables</button>
+        <button type="button" onclick="window.location.href='{{ path('app_reservation_index') }}';">Réservations</button>
+    </div>
 {% endblock %}
