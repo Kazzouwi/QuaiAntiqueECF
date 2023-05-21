@@ -229,7 +229,7 @@ label, input {
     margin: 5px;
 }
 
-.table, .meal, .opening_hours, .reservations {
+.table {
     margin: 15px;
     padding: 15px;
     text-align: center;
