@@ -244,7 +244,7 @@ label, input {
     align-items: center;
 }
 
-.admin-btn, .edit {
+.admin-btn, .edit, .new {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -254,7 +254,7 @@ label, input {
     margin-top: 40px;
 }
 
-.edit form {
+.edit form, .new form {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -262,7 +262,7 @@ label, input {
     width: 40%;
 }
 
-.edit form > * {
+.edit form > *, .new form > * {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -270,6 +270,6 @@ label, input {
     flex-wrap: wrap;
 }
 
-.edit > *, .edit form > * {
+.edit > *, .edit form > *, .new > *, .new form > * {
     margin-top: 15px;
 }

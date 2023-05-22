@@ -19,9 +19,11 @@
                         <p>{{ meal.price }}€</p>
                     </div>
                     <ul class="menu-allergen-list">
+                        <li>Allergène(s) : </li>
+                        <li class="menu-allergen"> - </li>
                         {% for ingredient in meal.ingredients %}
                             {% if ingredient.isAllergen %}
-                                <li class="menu-allergen">{{ ingredient.name }}, </li>
+                                <li class="menu-allergen">{{ ingredient.name }} - </li>
                             {% endif %}
                         {% endfor %}
                     </ul>
@@ -51,15 +53,17 @@
             <div class="menu-desert">
             <h1>Désserts :</h1>
             {% for meal in meals %}
-                {% if meal.mealCategory == 'desert' %}
+                {% if meal.mealCategory == 'dessert' %}
                 <div class="description">
                         <h3>{{ meal.name }} :</h3>
                         <p>{{ meal.price }}€</p>
                     </div>
                     <ul class="menu-allergen-list">
+                        <li>Allergène(s) : </li>
+                        <li class="menu-allergen"> - </li>
                         {% for ingredient in meal.ingredients %}
                             {% if ingredient.isAllergen %}
-                                <li class="menu-allergen">{{ ingredient.name }}, </li>
+                                <li class="menu-allergen">{{ ingredient.name }} - </li>
                             {% endif %}
                         {% endfor %}
                     </ul>

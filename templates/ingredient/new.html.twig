@@ -3,9 +3,11 @@
 {% block title %}New Ingredient{% endblock %}
 
 {% block main %}
-    <h1>Créer un nouvel ingrédient</h1>
+    <div class="new">
+        <h1>Créer un nouvel ingrédient</h1>
 
-    {{ include('ingredient/_form.html.twig') }}
+        {{ include('ingredient/_form.html.twig') }}
 
-    <a href="{{ path('app_ingredient_index') }}">Retour à la liste des ingrédients</a>
+        <a href="{{ path('app_ingredient_index') }}">Retour à la liste des ingrédients</a>
+    </div>
 {% endblock %}
