@@ -102,6 +102,7 @@ main {
 
 .oneMeal:hover > .mealName {
     display: flex;
+    flex-wrap: nowrap;
     position: absolute;
     top: -60px;
 }
