@@ -35,6 +35,7 @@ final class Version20230522204852 extends AbstractMigration
         $this->addSql('ALTER TABLE reservation ADD CONSTRAINT FK_42C849559395C3F3 FOREIGN KEY (customer_id) REFERENCES user (id)');
         $this->addSql('ALTER TABLE user_ingredient ADD CONSTRAINT FK_CCC8BE9CA76ED395 FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE user_ingredient ADD CONSTRAINT FK_CCC8BE9C933FE08C FOREIGN KEY (ingredient_id) REFERENCES ingredient (id) ON DELETE CASCADE');
+        $this->addSql('INSERT INTO `user` (`id`, `email`, `roles`, `password`, `guests`) VALUES (NULL, \'Kazzouwi59@gmail.com\', \'[\"ROLE_ADMIN\"]\', \'$2y$13$bHTfFWNr12Zltlzk2QJZMeu.DAWKZYbScSSQwzBalOnXhoU7GqQTq\', 1);');
     }
 
     public function down(Schema $schema): void
